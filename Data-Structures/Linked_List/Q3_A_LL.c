@@ -111,14 +111,14 @@ void moveOddItemsToBack(LinkedList *ll){
 				cur->next = NULL;	//맨뒤니까 다음노드는 NULL
 				tail = cur;		//꼬리를 현재노드로 변경
 			}
-			else{		//짝수의 경우
+			else{		//꼬리에 도착하면 이전노드가 현재 따라감
 				prev = cur;
 			}
 		}
-		else{
+		else{	//짝수의 경우 다음노드
 			prev = cur;
 		}
-		cur = next_node;
+		cur = next_node;	//다음 노드 고고
 	}
 
 // ListNode *cur = ll->head;
