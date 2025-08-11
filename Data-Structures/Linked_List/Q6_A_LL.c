@@ -88,26 +88,26 @@ int main()
 
 int moveMaxToFront(ListNode **ptrHead)
 {
-	if((*ptrHead) == NULL || (*ptrHead)->next == NULL){
+	if((*ptrHead) == NULL || (*ptrHead)->next == NULL){		//빈 리스트면
 		return 0;
 	}
-	ListNode *cur = *ptrHead;
-	ListNode *prev = NULL;
-	ListNode *max_node = *ptrHead;
-	ListNode *prev_max = NULL;
+	ListNode *cur = *ptrHead;	//현재 노드 시작주소
+	ListNode *prev = NULL;		//이전 노드
+	ListNode *max_node = *ptrHead;		//최대 노드 시작주소
+	ListNode *prev_max = NULL;		//최대 노드 이전 노드
 
-	while(cur != NULL){
-		if (cur->item > max_node->item){
-			max_node = cur;
-			prev_max = prev;
+	while(cur != NULL){		//모든 노드 순회
+		if (cur->item > max_node->item){		//현재 노드가 최대 노드보다 크면
+			max_node = cur;		//최대 노드는 현재꺼로
+			prev_max = prev;	//최대 노드 이전 노드는 이전꺼로
 		}
-		prev = cur;
-		cur = cur->next;
+		prev = cur;		//최대노드 아니면 그냥 다음 순회
+		cur = cur->next;		//다음 순회
 	}
-	if(max_node != *ptrHead){
-		prev_max->next = max_node->next;
-		max_node->next = *ptrHead;
-		*ptrHead = max_node;
+	if(max_node != *ptrHead){		//최대 노드가 맨 앞이면 끝
+		prev_max->next = max_node->next;		//최대 노드 이전 노드의 다음을 최대노드 다음이랑 연결
+		max_node->next = *ptrHead;		//최대 노드 다음을 맨앞으로 빼서 맨앞 노드를 다음노드로 연결
+		*ptrHead = max_node;		//시작 노드를 최대 노드로
 	}
 }
 
