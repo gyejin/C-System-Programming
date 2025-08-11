@@ -86,42 +86,42 @@ int main()
 
 void moveEvenItemsToBack(LinkedList *ll)
 {
-	ListNode *cur = ll->head;
-	ListNode *prev = NULL;
-	ListNode *tail = ll->head;
-	int count = ll->size;
+	ListNode *cur = ll->head;		//현재 노드
+	ListNode *prev = NULL;		//이전노드
+	ListNode *tail = ll->head;		//꼬리 노드
+	int count = ll->size;		//사이즈
 
-	if (ll->head == NULL || ll == NULL){
+	if (ll->head == NULL || ll == NULL){		//암것도 없으면
 		return;
 	}
 
-	while (tail->next != NULL){
+	while (tail->next != NULL){		//꼬리 찾기
 		tail = tail->next;
 	}
 
-	for (int i = 0; i < count; i++){
-		ListNode *next_node = cur->next;
-		if ( cur->item % 2 == 0){
-			if (cur != tail){
-				if (prev == NULL){
-					ll->head = next_node;
+	for (int i = 0; i < count; i++){		//전체 순회
+		ListNode *next_node = cur->next;		//다음 노드는 현재노드 다음
+		if ( cur->item % 2 == 0){		//짝수일 경우
+			if (cur != tail){		//현재가 꼬리가 아닌경우
+				if (prev == NULL){		//첫 노드일시
+					ll->head = next_node;	//헤드는 다음노드 (짝수는 건너뛰어야하니까 다음이 헤드)
 				}
 				else{
-					prev->next = next_node;
+					prev->next = next_node;		//이전노드는 현재 다음노드
 				}
 
-				tail->next = cur;
-				cur->next = NULL; 
-				tail = cur;
+				tail->next = cur;	//꼬리의 다음은 현재노드
+				cur->next = NULL; 	//꼬리의 다음은 없음
+				tail = cur;		//꼬리는 현재노드
 			}
-			else{
-				prev = cur;
+			else{	//현재가 꼬리일 경우
+				prev = cur;		//이전노드로 복귀
 			}
 		}
-		else{
-			prev = cur;
+		else{		//홀수일 경우
+			prev = cur;	//이전노드로 복귀
 		}
-		cur = next_node;
+		cur = next_node;	//현재노드는 다음 노드
 	}
 
 }
