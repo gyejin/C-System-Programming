@@ -99,14 +99,37 @@ int main()
 	return 0;
 }
 
-//////////////////////////////////////////////////////////////////////////////////
 
 void alternateMergeLinkedList(LinkedList *ll1, LinkedList *ll2)
 {
-    /* add your code here */
+    ListNode *cur1 = ll1->head;
+	ListNode *cur2 = ll2->head;
+	ListNode *tmp1, *tmp2;
+
+    if (ll1 == NULL || ll2 == NULL || ll1->head == NULL || ll2->head == NULL) {
+        return;
+    }
+	
+	while(cur1 != NULL && cur2 != NULL){
+		//ll1의 첫노드를 ll2의 첫노드에 이어주고 ll2의 첫노드를 ll1의 둘째노드랑 이어줌(반복n1->n2->n1+1)
+		tmp1 = cur1->next;
+		cur1->next = cur2;
+		tmp2 = cur2->next;
+		cur2->next = tmp1;
+
+		//사이즈가 하나 늘어나고 줄어듬에 따라
+		ll1->size++;
+		ll2->size--;
+		ll2->head = tmp2;	//ll2의 새 시작지점
+
+		//다음 차례
+		cur1 = tmp1;
+		cur2 = tmp2;
+	}
+
+
 }
 
-///////////////////////////////////////////////////////////////////////////////////
 
 void printList(LinkedList *ll){
 
