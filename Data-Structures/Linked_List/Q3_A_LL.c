@@ -82,14 +82,61 @@ int main()
 	return 0;
 }
 
-//////////////////////////////////////////////////////////////////////////////////
 
-void moveOddItemsToBack(LinkedList *ll)
-{
-	/* add your code here */
+void moveOddItemsToBack(LinkedList *ll){
+	ListNode *prev = NULL;		//이전 노드
+	ListNode *cur = ll->head;	//노드 현재단
+	ListNode *tail = ll->head;	//노드 끝단
+	int count = ll->size;		//사이즈 저장
+
+	if (ll == NULL || ll->head == NULL){	//암것도 안받으면
+		return;
+	}
+
+	while(tail->next != NULL){		//꼬리 찾기
+		tail = tail->next;
+	}
+
+	for( int i=0; i < count; i++ ){		//사이즈만큼 돌기
+		ListNode *next_node = cur->next;		//다음 노드 저장
+		if (cur->item % 2 == 1){		//홀수면
+			if (cur != tail){
+				if (prev == NULL){		//첫 노드일시!
+					ll->head = next_node;		//시작노드를 넣음
+				}
+				else{
+					prev->next = next_node;		//홀수의 다음노드를 이전노드의 다음에 넣음(홀수 생략)
+				}
+				tail->next = cur;	//꼬리 다음 노드에 현재노드(홀수)를 넣음 -> 맨뒤로 보냄
+				cur->next = NULL;	//맨뒤니까 다음노드는 NULL
+				tail = cur;		//꼬리를 현재노드로 변경
+			}
+			else{		//짝수의 경우
+				prev = cur;
+			}
+		}
+		else{
+			prev = cur;
+		}
+		cur = next_node;
+	}
+
+// ListNode *cur = ll->head;
+// ListNode *tmp = NULL;
+// if (ll == NULL || ll->head == NULL){
+// 	return;
+// 	while(cur->item % 2 == 1){
+// 		if (tmp == NULL){
+// 			tmp = cur;
+// 		}
+// 		else{
+// 			tmp->next = cur;
+// 		}
+// 	}
+// 	cur->next = tmp;
+// }
 }
 
-///////////////////////////////////////////////////////////////////////////////////
 
 void printList(LinkedList *ll){
 
