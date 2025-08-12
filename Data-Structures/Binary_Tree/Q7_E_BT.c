@@ -8,6 +8,7 @@ Purpose: Implementing the required functions for Question 7 */
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -102,7 +103,22 @@ int main()
 
 int smallestValue(BTNode *node)
 {
-	/* add your code here */
+	if (node == NULL){      //노드가 없으면
+        return INT_MAX;     //최대값 반환
+    }
+
+    int left_min = smallestValue(node->left);       //왼쪽 팀
+    int right_min = smallestValue(node->right);     //오른쪽 팀
+
+    int my_min = node->item;        //최소 초기값 초기 노드
+    if ( my_min > left_min){        //왼쪽팀 젤 작은 노드랑 현재 노드랑 비교
+        my_min = left_min;
+    }
+    if(my_min > right_min){         //오른쪽팀 젤 작은 노드랑 현재 노드랑 비교
+        my_min = right_min;
+    }
+
+    return my_min;      //최소값
 }
 
 //////////////////////////////////////////////////////////////////////////////////
