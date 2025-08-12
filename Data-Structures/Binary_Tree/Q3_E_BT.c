@@ -99,9 +99,29 @@ int main()
 //////////////////////////////////////////////////////////////////////////////////
 
 int countOneChildNodes(BTNode *node)
-
 {
-    /* add your code here */
+    if (node == NULL){
+        return 0;
+    }
+
+    int left_child = countOneChildNodes(node->left);        //왼쪽 팀 자식노드 1개인 노드 개수
+    int right_child = countOneChildNodes(node->right);      //오른쪽 팀 자식노드 1개인 노드 개수
+
+    int oneChild_count = 0;     //나 자신이 자식노드가 1개인지?
+    if((node->left != NULL && node->right == NULL) || (node->left == NULL && node->right != NULL)){
+        oneChild_count = 1;     //맞으면 1
+    }
+
+    return left_child + right_child + oneChild_count;       //왼쪽 팀 + 오른쪽 팀 + 나 자신
+
+    // if (node->left == NULL && node->right != NULL){
+    //     right_child += 1;
+    // }
+    // else if (node->right == NULL && node->right != NULL){
+    //     left_child += 1;
+    // }
+
+    // return (left_child + right_child);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
