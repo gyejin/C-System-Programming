@@ -116,12 +116,40 @@ int main()
 
 void createQueueFromLinkedList(LinkedList *ll, Queue *q)
 {
-	/* add your code here */
+	if( ll == NULL || q == NULL){
+		return;
+	}
+
+
+	ListNode *cur = ll->head;	//현재노드는 헤드를 가리킴
+	if ( !isEmptyQueue(q)){		//q가 비어있지 않으면
+		removeAllItemsFromQueue(q);		//제거하고 시작
+	}
+
+	while ( cur != NULL ){		//현재노드가 없으면
+		enqueue(q, cur->item);		//현재노드를 큐에 넣기
+		cur = cur->next;		//다음 노드 가리킴
+	}
 }
 
 void removeOddValues(Queue *q)
 {
-	/* add your code here */
+	if( q == NULL || isEmptyQueue(q)){
+		return;
+	}
+
+	Queue *temp_q = malloc(sizeof(Queue));		//임시 큐 메모리 할당(변수로도 선언 가능)
+	//Queue temp_q;
+	while(!isEmptyQueue(q)){	//큐 순회
+		int tmp = dequeue(q);		//deq해서 임시로 저장
+		if ( tmp %2 == 0){		//저장한게 짝수면
+			enqueue(temp_q, tmp);		//임시큐에 저장
+		}
+	}
+	while(!isEmptyQueue(temp_q)){		//임시큐 순회
+		int tmp2 = dequeue(temp_q);		//deq해서 임시로 저장
+		enqueue(q, tmp2);		//저장한걸 다시 원래 큐로 저장
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////////////
