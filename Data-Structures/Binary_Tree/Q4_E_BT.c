@@ -101,7 +101,6 @@ int main()
 //////////////////////////////////////////////////////////////////////////////////
 
 int sumOfOddNodes(BTNode *node)
-
 {
     if(node == NULL){
         return 0;
@@ -110,7 +109,7 @@ int sumOfOddNodes(BTNode *node)
     int left_sum = sumOfOddNodes(node->left);
     int right_sum = sumOfOddNodes(node->right);
 
-    int my_own = 0;
+    int my_own = 0;     //자기 자신이 홀수인지 확인(이게 왼쪽 오른쪽 다함)
     if ( node->item % 2 == 1){
         my_own = node->item;
     }
