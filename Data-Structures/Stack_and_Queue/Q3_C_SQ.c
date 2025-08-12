@@ -103,7 +103,23 @@ int main()
 
 int isStackPairwiseConsecutive(Stack *s)
 {
-  /* add your code here */
+  if (s == NULL || s->ll.size % 2 == 1){	//s가 업거나 s의 사이즈가 홀수일때 0반환
+	return 0;
+  }
+  if (s->ll.size == 0){		//s 사이즈가 0이면 1반환
+	return 1;
+  }
+
+  while(!isEmptyStack(s)){		//stack이 비었으면
+	int tmp1 = pop(s);		//하나 꺼내서 tmp
+	int tmp2 = pop(s);		//하나 꺼내서 저장
+	
+	if (abs(tmp1 - tmp2) != 1){		//절대값이 1이 아니면 0반환
+		return 0;
+	}
+  }
+
+  return 1;		//스택을 모두 비교했을때 모든 연속된 수의 차가 절대값이 1이면 1반환
 }
 
 //////////////////////////////////////////////////////////////////////////////////
