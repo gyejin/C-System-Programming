@@ -109,7 +109,13 @@ int main()
 
 void recursiveReverse(Queue *q)
 {
-/* add your code here */
+	if ( q == NULL || isEmptyQueue(q)){		//큐가 없거나 빈리트면 끝
+		return;
+	}
+	
+	int tmp = dequeue(q);		//deq해서 맨앞 요소 임시저장
+	recursiveReverse(q);		//재귀
+	enqueue(q, tmp);			//요소 저장한걸 다시 넣음
 }
 
 //////////////////////////////////////////////////////////////////
