@@ -105,7 +105,19 @@ int main()
 
 void mirrorTree(BTNode *node)
 {
-	/* add your code here */
+    if (node == NULL){      //노드가 비었으면 return
+        return;
+    }
+
+    BTNode *tmp;        //주소만 받을거니까 할당 필요x
+    //BTNode *tmp = (BTNode*)malloc(sizeof(BTNode));      //임시 노드 동적할당
+    //왼|오뒤집음
+    tmp = node->left;
+    node->left = node->right;
+    node->right = tmp;
+
+    mirrorTree(node->left);     //왼쪽 팀 알아서~
+    mirrorTree(node->right);    //오른쪽 팀 알아서~
 }
 
 //////////////////////////////////////////////////////////////////////////////////
