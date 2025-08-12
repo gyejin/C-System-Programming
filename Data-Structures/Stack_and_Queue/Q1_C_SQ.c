@@ -139,6 +139,7 @@ void removeOddValues(Queue *q)
 	}
 
 	Queue *temp_q = malloc(sizeof(Queue));		//임시 큐 메모리 할당(변수로도 선언 가능)
+	//Queue *temp_q = (Queue*)calloc(sizeof(Queue));	//0으로 초기화와 동시에 형변환
 	//Queue temp_q;
 	while(!isEmptyQueue(q)){	//큐 순회
 		int tmp = dequeue(q);		//deq해서 임시로 저장
@@ -150,6 +151,7 @@ void removeOddValues(Queue *q)
 		int tmp2 = dequeue(temp_q);		//deq해서 임시로 저장
 		enqueue(q, tmp2);		//저장한걸 다시 원래 큐로 저장
 	}
+	free(temp_q);		//메모리 반환
 }
 
 //////////////////////////////////////////////////////////////////////////////////
