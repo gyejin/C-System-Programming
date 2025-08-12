@@ -116,7 +116,17 @@ int main()
 int identical(BTNode *tree1, BTNode *tree2)
 
 {
-   /* add your code here */
+   if (tree1 == NULL && tree2 == NULL){     //트리가 둘 다 비어있으면 균형이긴해
+    return 1;
+   }
+   if (tree1 == NULL || tree2 == NULL){     //트리가 둘 중 하나만 비어있으면 같지 않음
+    return 0;
+   }
+   if (tree1->item != tree2->item){     //값이 다르면
+    return 0;
+   }
+   //이걸 지나면 두 트리 노드는 같은 수 검증 완료, 왼쪽 오른쪽 내려가면서 재귀
+   return (identical(tree1->left, tree2->left) && identical(tree1->right, tree2->right));
 }
 
 /////////////////////////////////////////////////////////////////////////////////
