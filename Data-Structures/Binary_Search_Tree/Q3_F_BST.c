@@ -91,28 +91,47 @@ int main()
 
 void preOrderIterative(BSTNode *root)
 {
-	if (root == NULL){
+	if (root == NULL){		//트리가 비었으면 끝
 		return;
 	}
 
-	Stack s;
-	s.top = NULL;
+	Stack s;		//스택 사용
+	s.top = NULL;	//스택 초기값 설정
+	BSTNode *cur = root;		//현재노드 루트로 설정
 
-	push(&s, root);		//루트 먼저 넣고
-	while(!isEmpty(&s)){		//스택 순회
-		BSTNode *cur = pop(&s);		//스택에서 하나 빼서 현재노드로 넣음
-		printf("%d ", cur->item);	//넣은거 출력
-		
-		//스택은 후입선출이니까 오른쪽 먼저넣어야 루트 다음 왼쪽 서브트리가 먼저 나올것임
-		if (cur->right != NULL){		//오른쪽이 남았음 오른쪽 push
-			push(&s, cur->right);
+	while (cur != NULL || !isEmpty(&s)){		//트리 순회하면서
+		while(cur != NULL){		//더이상 방문할 노드가 없으면 끝
+			push(&s, cur);		//스택에 현재노드 넣기
+			printf("%d ", cur->item);		//빼고 출력
+			cur = cur->left;	//현재노드를 왼쪽으로 이동
 		}
-		if (cur->left != NULL){			//왼쪽이 남았음 왼쪽 push
-			push(&s, cur->left);
-		}
+		cur = pop(&s);		//왼쪽 끝에 닿으면 하나씩 빼기 시작
+
+		cur = cur->right;	//빼고 오른쪽도 방문 
 	}
-		
 }
+// {
+// 	if (root == NULL){
+// 		return;
+// 	}
+
+// 	Stack s;
+// 	s.top = NULL;
+
+// 	push(&s, root);		//루트 먼저 넣고
+// 	while(!isEmpty(&s)){		//스택 순회
+// 		BSTNode *cur = pop(&s);		//스택에서 하나 빼서 현재노드로 넣음
+// 		printf("%d ", cur->item);	//넣은거 출력
+
+// 		//스택은 후입선출이니까 오른쪽 먼저넣어야 루트 다음 왼쪽 서브트리가 먼저 나올것임
+// 		if (cur->right != NULL){		//오른쪽이 남았음 오른쪽 push
+// 			push(&s, cur->right);
+// 		}
+// 		if (cur->left != NULL){			//왼쪽이 남았음 왼쪽 push
+// 			push(&s, cur->left);
+// 		}
+// 	}	
+// }
 
 ///////////////////////////////////////////////////////////////////////////////
 
