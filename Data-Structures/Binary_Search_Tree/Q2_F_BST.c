@@ -90,7 +90,24 @@ int main()
 
 void inOrderTraversal(BSTNode *root)
 {
-	 /* add your code here */
+	if (root == NULL){		//트리가 비었으면 끝
+		return;
+	}
+
+	Stack s;		//스택 사용
+	s.top = NULL;	//스택 초기값 설정
+	BSTNode *cur = root;		//현재노드 루트로 설정
+
+	while (cur != NULL || !isEmpty(&s)){		//트리 순회하면서
+		while(cur != NULL){		//더이상 방문할 노드가 없으면 끝
+			push(&s, cur);		//스택에 현재노드 넣기
+			cur = cur->left;	//현재노드를 왼쪽으로 이동
+		}
+		cur = pop(&s);		//왼쪽 끝에 닿으면 하나씩 빼기 시작
+		printf("%d ", cur->item);		//빼고 출력
+
+		cur = cur->right;	//빼고 오른쪽도 방문 
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////
