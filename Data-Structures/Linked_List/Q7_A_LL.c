@@ -87,9 +87,20 @@ int main()
 
 void RecursiveReverse(ListNode **ptrHead)
 {
-	/* add your code here */
-}
+	if ( (*ptrHead) == NULL || (*ptrHead)->next == NULL){		//빈리스트면, next가 가리키는게 없으면
+		return;
+	}
+	
+	ListNode *cur = *ptrHead;	//첫째 노드
+	ListNode *rest = cur->next;		//나머지 노드
 
+	RecursiveReverse(&rest);		//나머지 리스트 순회
+
+	cur->next->next = cur;		//현재 노드의 뒤에뒤에, 다음노드의 다음노드로 연결 
+	cur->next = NULL;		//기존 연결 끊기
+
+	*ptrHead = rest;	//전체 리스트 시작 노드를 rest로
+}
 //////////////////////////////////////////////////////////////////////////////////
 
 void printList(LinkedList *ll){

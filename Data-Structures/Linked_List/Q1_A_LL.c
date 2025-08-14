@@ -71,7 +71,7 @@ int main()
 		case 3:
 			printf("The resulting sorted linked list is: ");
 			printList(&ll);
-			removeAllItems(&ll);
+			//removeAllItems(&ll);
 			break;
 		case 0:
 			removeAllItems(&ll);
@@ -86,14 +86,45 @@ int main()
 	return 0;
 }
 
-//////////////////////////////////////////////////////////////////////////////////
 
-int insertSortedLL(LinkedList *ll, int item)
-{
-	/* add your code here */
+int insertSortedLL(LinkedList *ll, int item){
+	ListNode *cur = ll->head;
+	ListNode *prev = NULL;
+	int index = 0;
+
+	if (cur == NULL){		//첫 노드인 경우 
+		insertNode(ll, 0, item);	//노드 넣고 0반환
+		return 0;
+	}
+
+	while(cur != NULL){
+		if (cur->item ==item){		//중복이 있는경우
+			return -1;		//-1 반환
+		}
+		if (cur->item > item){	//item보다 큰 경우
+			insertNode(ll, index, item);
+			return index;
+		}
+		prev = cur;
+		cur = cur->next;
+		index++;
+	}
+	insertNode(ll, index, item);		//다 통과한거면 있는 노드들이 다 작다는 거니까 가장 큰 노드 삽입
+	return index;
+    // 1. 여기서 로직을 짜서 'index'를 찾아야 해.
+    //    - 리스트를 순회하면서 item이 들어갈 위치(index) 찾기
+    //    - 순회 중에 item과 같은 값을 만나면 바로 return -1; [cite: 685, 687]
+
+    // ... index 찾기 및 중복 검사 로직 ...
+    
+    // 만약 중복이라면 위에서 이미 return -1 했을 거야.
+    // 여기까지 왔다는 건 중복이 없다는 뜻!
+    
+    // 2. 위에서 찾은 'index'를 가지고 insertNode 함수를 호출!
+	// 3. 성공했으니 찾았던 'index'를 반환. [cite: 686]
+	// 혹시 모를 다른 에러 상황 대비
 }
 
-///////////////////////////////////////////////////////////////////////////////////
 
 void printList(LinkedList *ll){
 

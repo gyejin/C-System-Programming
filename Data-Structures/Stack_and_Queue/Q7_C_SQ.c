@@ -8,6 +8,7 @@ Purpose: Implementing the required functions for Question 7 */
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define MIN_INT -1000
 
@@ -104,7 +105,41 @@ int main()
 ////////////////////////////////////////////////////////////
 int balanced(char *expression)
 {
-/* add your code here */
+	if ( expression == NULL){	//빈 문자열이면 끝
+		return 1;
+	}
+
+	Stack bs;		//스택 받을 bs 변수 선언
+	bs.ll.head = NULL;
+	bs.ll.size = 0;
+
+	for (int i=0; i < strlen(expression); i++){		//문자열 크기만큼 반복
+		if ( expression[i] == '(' || expression[i] == '[' || expression[i] == '{'){		//여는 괄호는 push
+			push(&bs, expression[i]);
+		}
+		else if (expression[i] == ')' || expression[i] == ']' || expression[i] == '}'){		//닫는 괄호는 스택 마지막 문자랑 비교 확인, pop
+			if (isEmptyStack(&bs)){
+				return 1;
+			}
+
+			char top = pop(&bs);
+			if (expression[i] == ')' && top != '('){
+				return 1;		//짝이 안맞으면 밸런스 아닌거
+			}
+			if (expression[i] == ']' && top != '['){
+				return 1;
+			}
+			if (expression[i] == '}' && top != '{'){
+				return 1;
+			}
+		}
+	}
+	if (isEmptyStack(&bs)){		//다 비었으면 밸런스 맞음 -> 다 균형을 이루고 있다는 뜻
+		return 0;
+	}
+	else{		//다 안비었으면 밸런스 안맞음
+		return 1;
+	}
 }
 
 ////////////////////////////////////////////////////////////

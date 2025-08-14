@@ -113,12 +113,41 @@ int main()
 
 void createStackFromLinkedList(LinkedList *ll, Stack *s)
 {
-    /* add your code here */
+    if (ll == NULL || s == NULL){
+		return;
+	}
+	if (!isEmptyStack(s)){
+		removeAllItemsFromStack(s);
+	}
+
+	ListNode *cur = ll->head;
+	while ( cur != NULL){
+		int tmp = cur->item;
+		push(s, tmp);
+		cur = cur->next;
+	}
 }
 
 void removeEvenValues(Stack *s)
 {
-	/* add your code here */
+	if(s == NULL || isEmptyStack(s)){
+		return;
+	}
+
+	Stack *temp_s = (Stack*)calloc(1, sizeof(Stack));	//malloc은 초기화가 안되있어서 쓰레기값이 존재할 가능성이 큼->calloc으로 사용, malloc시 temp_s->ll.head = NULL; temp_s->ll.size = 0; 가능
+	while(!isEmptyStack(s)){	//s 순회
+		int tmp = pop(s);	//하나씩 뺴서
+		if (tmp % 2 == 1){		//홀수면
+			push(temp_s, tmp);		//임시스택에 저장
+		}
+	}
+
+	while(!isEmptyStack(temp_s)){		//temp_s 순회
+		int tmp2 = pop(temp_s);		//하나씩 빼서
+		push(s, tmp2);		//스택에 저장
+	}
+
+	free(temp_s);		//메모리 반환
 }
 
 //////////////////////////////////////////////////////////////////////////////////

@@ -91,7 +91,32 @@ int main()
 
 void postOrderIterativeS1(BSTNode *root)
 {
-	 /* add your code here */
+	if (root == NULL){		//루트가 비었으면 끝
+		return;
+	}
+
+	Stack s;		//스택 변수 생성
+	s.top = NULL;	//초깃값
+	BSTNode *cur = root;		//현재노드 루트
+	BSTNode *last_node = NULL;	//마지막으로 방문한 노드 반환
+
+	while( cur != NULL || !isEmpty(&s)){	//스택이 비어있지 않거나 현재노드가 있으면 순회
+		if(cur != NULL){		//현재노드 존재하면
+			push(&s, cur);		//현재노드 스택에 넣기
+			cur = cur->left;	//왼쪽 서브트리로 출발
+		}
+		else{	//노드가 존재하지 않으면
+			BSTNode *peek_node = peek(&s);	//가장 마지막에 넣은 노드 peek_node에 넣기
+			if(peek_node->right != NULL && last_node != peek_node->right){		//마지막에 넣은 노드의 오른쪽 자식이 존재하지 않거나 마지막에 넣은 노드가 peek의 오른쪽 자식과 같지않으면
+				cur = peek_node->right;		//현재노드를 peek의 오른쪽 자식으로 옮김
+			}
+			else{		//마지막에 넣은 노드의 오른쪽 자식이 존재 && 마지막에 넣은 노드가 peek의 오른쪽 자식과 같으면
+				pop(&s);		//꺼냄
+				printf("%d ", peek_node->item);		//peek의 노드 출력
+				last_node = peek_node;		//마지막 노드는 출력한 노드
+			}
+		}
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -112,7 +112,23 @@ int main()
 
 void reverse(Queue *q)
 {
-/* add your code here */
+	if (q == NULL || q->ll.size == 0){		//큐가 없거나 비어있으면 끝
+		return;
+	}
+	Stack s;		//스택 선언 및 초기값
+	s.ll.head=NULL;
+	s.ll.size =0;
+	s.ll.tail =NULL; 
+
+	while (!isEmptyQueue(q)){		//큐 순회
+		int tmp1 = dequeue(q);		//deq해서 -> 큐는 선입선출
+		push(&s, tmp1);				//스택에 넣음 -> 스택은 후입선출
+	}
+
+	while(!isEmptyStack(&s)){		//스택 순회
+		int tmp2 = pop(&s);			//pop해서
+		enqueue(q, tmp2);			//큐에 넣음 -> 뒤집힘
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

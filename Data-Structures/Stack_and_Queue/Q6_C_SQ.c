@@ -111,7 +111,16 @@ int main()
 
 void removeUntil(Stack *s, int value)
 {
-/* add your code here */
+	if (s == NULL || isEmptyStack(s)){		//스택이 없거나 비어있으면
+		return;
+	}
+	while (!isEmptyStack(s)){		//스택 순회
+		int tmp = peek(s);		//맨 위 정수 확인 및 반환
+		if (value == tmp){		//찾고자 하는 값과 같으면
+			break;		//반복문 종료 및 남은게 큐
+		}
+		pop(s);		//찾고자 하는 값과 다르면 제거
+	}
 }
 
 //////////////////////////////////////////////////////////////////////////////////

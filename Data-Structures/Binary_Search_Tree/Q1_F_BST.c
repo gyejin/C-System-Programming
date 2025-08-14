@@ -93,8 +93,27 @@ int main()
 
 void levelOrderTraversal(BSTNode* root)
 {
+	if (root == NULL){		//루트가 없으면 트리 없는것
+		return;
+	}
 
-    /* add your code here */
+	Queue q;		//q 변수 하나 선언
+	//q->head = root;
+	q.head = NULL;	//초기값 세팅
+	q.tail = NULL;
+	enqueue(&q.head, &q.tail, root);		//head랑 tail 주소 넣어주고 루트(트리)도 넣어줌 하나 큐에 넣기
+	//while(q != NULL){
+	while(!isEmpty(q.head)){		//큐가 빌때까지 순회
+		BSTNode *cur = dequeue(&q.head, &q.tail);		//헤드에 있는거 꺼내기
+		printf("%d ", cur->item);		//출력
+
+		if (cur->left != NULL){		//왼쪽이 계속 있으면
+			enqueue(&q.head, &q.tail, cur->left);		//왼쪽 자식으로가서 헤드랑 tail 세팅후 하나 넣기
+		}
+		if (cur->right != NULL){	//오른쪽이 계속 있으면
+			enqueue(&q.head, &q.tail, cur->right);		//오른쪽 자식으로가서 헤드랑 tail 세팅후 하나 넣기
+		}
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////

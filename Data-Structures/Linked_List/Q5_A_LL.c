@@ -38,7 +38,7 @@ int removeNode(LinkedList *ll, int index);
 
 int main()
 {
-	int c, i;
+	int c = 1, i;
 	LinkedList ll;
 	LinkedList resultFrontList, resultBackList;
 
@@ -102,9 +102,73 @@ int main()
 
 void frontBackSplitLinkedList(LinkedList *ll, LinkedList *resultFrontList, LinkedList *resultBackList)
 {
-	/* add your code here */
+	ListNode *splitNode = ll->head;		//자른 노드 헤드
+	int front_count = ll->size;		//전단 크기 세기
+	if (front_count % 2 == 1){		//홀수면 +1해서/2 => 올림
+		front_count = (front_count+1) / 2;
+	}
+	else {		//짝수면
+		front_count /= 2;		//그냥 반
+	}
+	int back_count = ll->size - back_count;		//후단 크기 (전체 - 전단)
+
+	if (ll->size == 1){		//연결리스트 사이즈가 1이면
+		resultFrontList->head = ll->head;		//전단이 헤드
+		resultFrontList->size = 1;		//전단 사이즈는 1
+		resultBackList->head = NULL;	//후단 없음
+		resultBackList->size = 0;		//후단 사이즈 1
+		//옮겼으니까 기존 리스트는 초기화
+		ll->head = NULL;
+		ll->size = 0;
+		return;
+	}
+
+	for (int i=0; i < front_count-1; i++){		//자르기 전단 노드까지 이동
+		splitNode = splitNode->next;
+	}
+
+	resultFrontList->head = ll->head;		//전단 헤드는 기존 리스트 헤드(첨부터)
+	resultFrontList->size = front_count;	//전단 사이즈까지
+	resultBackList->head = splitNode->next;		//후단 헤드는 잘린 노드 다음부터
+	resultBackList->size = back_count;		//후단 사이즈까지
+
+	splitNode->next = NULL;		//끊어버리기
+
+	//옮겼으니까 기존 리스트는 초기화
+	ll->head = NULL;
+	ll->size = 0;
+
 }
 
+
+/*
+{
+	ListNode *cur = ll->head;
+	int count = ll->size;
+	if (count % 2 == 1){
+		count = (count+1) / 2;
+	}
+	else {
+		count /= 2;
+	}
+
+	for (int i=0; i < count; i++){
+		if (resultFrontList == NULL){
+			resultFrontList = cur;
+			resultFrontList->head->next = cur->next;
+		}
+		else{
+			resultFrontList->head->next = cur;
+			resultFrontList->size++;
+		}
+	}
+
+	for (int i = 0; i < count; i++){
+		
+	}
+	
+}
+*/
 ///////////////////////////////////////////////////////////////////////////////////
 
 void printList(LinkedList *ll){
