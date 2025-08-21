@@ -428,7 +428,7 @@ int rbtree_erase(rbtree *t, node_t *z) {
   // 삭제/이동된 노드(y)의 원래 색이 BLACK이었다면, 규칙이 깨졌을 수 있습니다.
   // fixup 함수를 호출하여 트리를 복구합니다.
   if (y_original_color == RBTREE_BLACK) {
-    // rb_erase_fixup(t, x); // 다음 미션에서 구현!
+    rb_erase_fixup(t, x); // 다음 미션에서 구현!
   }
 
   // 삭제된 노드 z의 메모리를 해제합니다.
