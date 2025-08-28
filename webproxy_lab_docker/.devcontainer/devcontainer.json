@@ -13,7 +13,7 @@
                 "ms-vscode.cpptools"
             ],
             "settings": {
-                "terminal.integrated.defaultProfile.linux": "bash",
+                "terminal.integrated.defaultProfile.linux": "zsh",
                 "C_Cpp.default.includePath": [
                     "/usr/include",
                     "/usr/local/include"
