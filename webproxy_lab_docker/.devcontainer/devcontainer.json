@@ -1,0 +1,25 @@
+{
+    "name": "Proxylab Development Container",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".."
+    },
+    "updateRemoteUserUID": false, // <--- 이 줄을 추가해주세요!
+    "remoteUser": "root",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cpptools-extension-pack",
+                "ms-vscode.cpptools"
+            ],
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "zsh",
+                "C_Cpp.default.includePath": [
+                    "/usr/include",
+                    "/usr/local/include"
+                ],
+                "C_Cpp.default.compilerPath": "/usr/bin/gcc"
+            }
+        }
+    }
+}
